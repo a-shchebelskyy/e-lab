@@ -1,17 +1,33 @@
 {
   "extends": "./tsconfig.base.json",
-  "include": ["src/**/*"],
+  "include": ["vite.config.ts"],
   "exclude": ["node_modules", "build", "dist", "**/*.test.ts"],
+  // "compilerOptions": {
+  //   "noEmit": true,
+  //   "jsx": "preserve",
+  //   "lib": ["esnext", "dom", "dom.iterable"],
+  //   "resolveJsonModule": true,
+  //   "allowImportingTsExtensions": true,
+  //   "moduleResolution": "bundler",
+  //   "types": ["node", "vite/client"],
+  //   "paths": {
+  //     "@/*": ["./src/*"]
+  //   }
+  // }
   "compilerOptions": {
-    "noEmit": true,
-    "jsx": "preserve",
-    "lib": ["esnext", "dom", "dom.iterable"],
-    "resolveJsonModule": true,
-    "allowImportingTsExtensions": true,
-    "moduleResolution": "bundler",
-    "types": ["node", "vite/client"],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  }
+    "composite": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler", /* or "Node" if using older versions */
+    "allowSyntheticDefaultImports": true
+  },
 }
+
+// {
+//   "compilerOptions": {
+//     "composite": true,
+//     "module": "ESNext",
+//     "moduleResolution": "Bundler", /* or "Node" if using older versions */
+//     "allowSyntheticDefaultImports": true
+//   },
+//   "include": ["vite.config.ts"]
+// }
