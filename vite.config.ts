@@ -11,7 +11,7 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
 
-import runtimeErrorOverlay from '@replit/vite-plugin-runtime-error-modal';
+//import runtimeErrorOverlay from '@replit/vite-plugin-runtime-error-modal';
 
 const rawPort = 5173;
 
@@ -36,44 +36,43 @@ if (!basePath) {
 }
 
 export default defineConfig({
-  base: basePath,
+  base: '/',
   plugins: [
     react(),
     tailwindcss(),
-    runtimeErrorOverlay(),
-    ...(process.env.NODE_ENV !== 'production' &&
-    process.env.REPL_ID !== undefined
-      ? [
-          await import('@replit/vite-plugin-cartographer').then((m) =>
-            m.cartographer({
-              root: path.resolve(import.meta.dirname, '..'),
-            }),
-          ),
-          await import('@replit/vite-plugin-dev-banner').then((m) =>
-            m.devBanner(),
-          ),
-        ]
-      : []),
+    // runtimeErrorOverlay(),
+    // ...(process.env.NODE_ENV !== 'production' &&
+    // process.env.REPL_ID !== undefined
+    //   ? [
+    //       await import('@replit/vite-plugin-cartographer').then((m) =>
+    //         m.cartographer({
+    //           root: path.resolve(import.meta.dirname, '..'),
+    //         }),
+    //       ),
+    //       await import('@replit/vite-plugin-dev-banner').then((m) =>
+    //         m.devBanner(),
+    //       ),
+    //     ]
+    //   : []),
   ],
-  resolve: {
-    alias: {
-      '@': path.resolve(import.meta.dirname, 'src'),
-      '@assets': path.resolve(
-        import.meta.dirname,
-        '..',
-        '..',
-        'attached_assets',
-      ),
-    },
-    dedupe: ['react', 'react-dom'],
+  resolve: {    
+    alias: {      
+      '@': path.resolve(__dirname, './src'),    
+    },  
   },
   root: path.resolve(import.meta.dirname),
   build: {
-    outDir: path.resolve(import.meta.dirname, 'dist/public'),
+    outDir: 'dist',
+    //path.resolve(import.meta.dirname, 'dist/public'),
     emptyOutDir: true,
+    sourcemap: false,
+    minify: 'esbuild',
+    chunkSizeWarningLimit: 1000,
   },
   server: {
-    port,
+    port: 3000,
+    open: true,
+    cors: true,
     strictPort: true,
     host: '0.0.0.0',
     allowedHosts: true,
