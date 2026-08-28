@@ -66,7 +66,6 @@ export default defineConfig({
     //path.resolve(import.meta.dirname, 'dist/public'),
     emptyOutDir: true,
     sourcemap: false,
-    minify: 'esbuild',
     chunkSizeWarningLimit: 1000,
   },
   server: {

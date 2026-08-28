@@ -18,7 +18,11 @@
     "composite": true,
     "module": "ESNext",
     "moduleResolution": "Bundler", /* or "Node" if using older versions */
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
 }
 
