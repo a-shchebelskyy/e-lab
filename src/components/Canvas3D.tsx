@@ -14,7 +14,7 @@ export function Canvas3D() {
     const height = containerRef.current.clientHeight;
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color("#0d1117");
+    //scene.background = new THREE.Color("#09090b");
 
     // Add grid
     // const gridHelper = new THREE.GridHelper(100, 100, 0x30363d, 0x21262d);
@@ -22,11 +22,11 @@ export function Canvas3D() {
     // scene.add(gridHelper);
 
     // Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
     scene.add(ambientLight);
 
     const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    dirLight.position.set(1, 2, 3);
+    dirLight.position.set(1, 0, -1);
     scene.add(dirLight);
 
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
@@ -46,8 +46,10 @@ export function Canvas3D() {
     const centerX = (minX + maxX) / 2;
     const centerY = (minY + maxY) / 2;
 
-    camera.position.set(centerX, centerY, 300);
+    camera.position.set(centerX, centerY, -600);
     camera.lookAt(centerX, centerY, 0);
+    //console.log(camera.rotation);
+    camera.rotation.set(-3.14, 0, 0);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
@@ -66,12 +68,13 @@ export function Canvas3D() {
 
     atoms.forEach((atom) => {
       const color = CPK_COLORS[atom.element] || "#ffffff";
-      const radius = (ATOMIC_RADII[atom.element] || 1.0) * 8; // Scale up for visual
+      const radius = 15;
+      //(ATOMIC_RADII[atom.element] || 1.0) / 5; // Scale down for visual
 
       const material = new THREE.MeshStandardMaterial({
         color,
-        roughness: 0.3,
-        metalness: 0.2,
+        roughness: 0.5,
+        metalness: 0.3,
       });
 
       const sphere = new THREE.Mesh(sphereGeometry, material);
@@ -89,27 +92,45 @@ export function Canvas3D() {
       const p1 = new THREE.Vector3(a1.x, a1.y, a1.z || 0);
       const p2 = new THREE.Vector3(a2.x, a2.y, a2.z || 0);
 
-      const distance = p1.distanceTo(p2);
+      const pos1 = p1.clone().lerp(p2, 0.25);
+      const pos2 = p1.clone().lerp(p2, 0.75);
       const midpoint = p1.clone().lerp(p2, 0.5);
 
-      const material = new THREE.MeshStandardMaterial({
-        color: 0x999999,
+      const dist1 = p1.distanceTo(midpoint);
+      const dist2 = midpoint.distanceTo(p2);
+
+
+      const material1 = new THREE.MeshStandardMaterial({
+        color: CPK_COLORS[a1.element] || "#ffffff",
+        roughness: 0.5,
+      });
+
+      const material2 = new THREE.MeshStandardMaterial({
+        color: CPK_COLORS[a2.element] || "#ffffff",
         roughness: 0.5,
       });
 
       // For double/triple bonds, we could add multiple cylinders offset by normal vector
       // For this sandbox, we'll draw one thicker cylinder for order > 1
-      const thickness = bond.order > 1 ? 4 : 2;
+      const thickness = bond.order > 1 ? 3 : 3;
 
-      const cylinder = new THREE.Mesh(cylinderGeometry, material);
-      cylinder.scale.set(thickness, distance, thickness);
-      cylinder.position.copy(midpoint);
-      cylinder.quaternion.setFromUnitVectors(
+      const cylinder1 = new THREE.Mesh(cylinderGeometry, material1);
+      cylinder1.scale.set(thickness, dist1, thickness);
+      cylinder1.position.copy(pos1);
+      cylinder1.quaternion.setFromUnitVectors(
         new THREE.Vector3(0, 1, 0),
         p2.clone().sub(p1).normalize(),
       );
 
-      atomGroup.add(cylinder);
+      const cylinder2 = new THREE.Mesh(cylinderGeometry, material2);
+      cylinder2.scale.set(thickness, dist2, thickness);
+      cylinder2.position.copy(pos2);
+      cylinder2.quaternion.setFromUnitVectors(
+        new THREE.Vector3(0, 1, 0),
+        p2.clone().sub(p1).normalize(),
+      );
+
+      atomGroup.add(cylinder1, cylinder2);
     });
 
     // Rotate slightly for a 3D feel

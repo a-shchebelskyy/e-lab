@@ -2,30 +2,30 @@ import { Atom, Bond } from '../types';
 
 export const CPK_COLORS: Record<string, string> = {
   H: '#FFFFFF',
-  C: '#909090',
-  N: '#3050F8',
-  O: '#FF0D0D',
-  F: '#90E050',
-  P: '#FF8000',
-  S: '#FFFF30',
-  Cl: '#1FF01F',
-  Br: '#A62929',
-  I: '#940094',
-  B: '#FFB5B5',
-  Si: '#DAA520',
-  Na: '#AB5CF2',
-  K: '#8F40D4',
-  Li: '#CC80FF',
-  Mg: '#8AFF00',
-  Ca: '#3DFF00',
-  Fe: '#E06633',
-  Cu: '#C88033',
-  Zn: '#7D80B0',
+  C: '#284A4A',
+  N: '#3357F4',
+  O: '#FC1621',
+  F: '#D32991',
+  P: '#FD8023',
+  S: '#FFFD38',
+  Cl: '#33EE37',
+  Br: '#D38641',
+  I: '#FC28FC',
+  B: '#36D339',
+  Si: '#EFC8A2',
+  Na: '#AA62EF',
+  K: '#D31575',
+  Li: '#CB84FC',
+  Mg: '#218B23',
+  Ca: '#838C8C',
+  Fe: '#DE663B',
+  Cu: '#C6803B',
+  Zn: '#7D81AE',
   Ag: '#C0C0C0',
-  Au: '#FFD123',
-  Pt: '#D0D0E0',
-  Hg: '#B8B8D0',
-  Al: '#BFA6A6',
+  Au: '#FED03C',
+  Pt: '#D0D0DF',
+  Hg: '#B8B8CF',
+  Al: '#BEA6A6',
   Pb: '#575961'
 };
 
@@ -38,11 +38,11 @@ export const ATOMIC_MASSES: Record<string, number> = {
 };
 
 export const ATOMIC_RADII: Record<string, number> = {
-  H: 0.32, C: 0.75, N: 0.71, O: 0.63, F: 0.64,
-  P: 1.11, S: 1.03, Cl: 0.99, Br: 1.14, I: 1.33,
-  B: 0.85, Si: 1.16, Na: 1.55, K: 1.96, Li: 1.34,
-  Mg: 1.39, Ca: 1.74, Fe: 1.25, Cu: 1.28, Zn: 1.34,
-  Ag: 1.44, Au: 1.44, Pt: 1.38, Hg: 1.51, Al: 1.18, Pb: 1.46
+  H: 32, C: 75, N: 71, O: 63, F: 64,
+  P: 111, S: 103, Cl: 99, Br: 114, I: 133,
+  B: 85, Si: 116, Na: 155, K: 196, Li: 134,
+  Mg: 139, Ca: 174, Fe: 125, Cu: 128, Zn: 134,
+  Ag: 144, Au: 144, Pt: 138, Hg: 151, Al: 118, Pb: 146
 };
 
 // Simplified valences for implicit H calculation

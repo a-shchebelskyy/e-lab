@@ -86,21 +86,6 @@ export function TopBar() {
           <TooltipContent>Redo (Ctrl+Y)</TooltipContent>
         </Tooltip>
       </div>
-
-      <div className="flex items-center space-x-2 bg-muted p-1 rounded-md border border-border">
-        <button 
-          onClick={() => setViewMode('2d')}
-          className={`px-3 py-1 text-sm font-medium rounded transition-colors ${viewMode === '2d' ? 'bg-card text-primary shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
-        >
-          2D Editor
-        </button>
-        <button 
-          onClick={() => setViewMode('3d')}
-          className={`px-3 py-1 text-sm font-medium rounded transition-colors ${viewMode === '3d' ? 'bg-card text-primary shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
-        >
-          3D Viewer
-        </button>
-      </div>
       
       <div className="flex items-center space-x-1">
         <Tooltip>

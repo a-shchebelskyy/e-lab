@@ -252,6 +252,20 @@ export function Toolbar() {
           <TooltipContent>Toggle Grid</TooltipContent>
         </Tooltip>
       </div>
+      <div className="flex items-center bg-muted rounded-full">
+        <button 
+          onClick={() => setViewMode('2d')}
+          className={`px-4 py-2 text-xs font-medium rounded-full transition-colors ${viewMode === '2d' ? 'bg-gradient-to-r from-[#34d399] to-[#059669] text-white shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
+        >
+          2D
+        </button>
+        <button 
+          onClick={() => setViewMode('3d')}
+          className={`px-4 py-2 text-xs font-medium rounded-full transition-colors ${viewMode === '3d' ? 'bg-[#34d399] text-white shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
+        >
+          3D
+        </button>
+      </div>
     </div>
   );
 }

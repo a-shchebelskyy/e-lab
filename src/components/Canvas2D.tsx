@@ -347,7 +347,7 @@ export function Canvas2D() {
   return (
     <div 
       ref={containerRef}
-      className={`flex-1 relative overflow-hidden bg-background ${displayOptions.showGrid ? 'bg-dot-grid' : ''}`}
+      className={`flex-1 relative overflow-hidden ${displayOptions.showGrid ? 'bg-dot-grid' : ''}`}
       style={{
          backgroundPosition: `${camera.x}px ${camera.y}px, ${camera.x + DX * camera.zoom}px ${camera.y + DY / 2 * camera.zoom}px`,
          backgroundSize: `${2* DX * camera.zoom}px ${DY * camera.zoom}px`
